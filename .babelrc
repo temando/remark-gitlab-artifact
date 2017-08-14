@@ -1,0 +1,22 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "node": "6.10"
+        },
+        "exclude": [
+          "transform-regenerator",
+          "transform-es2015-classes"
+        ]
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      "transform-async-to-module-method",
+      { "module": "bluebird", "method": "coroutine" }
+    ]
+  ]
+}

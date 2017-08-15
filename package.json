@@ -1,6 +1,6 @@
 {
   "name": "remark-gitlab-artifact",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Downloads artifacts from Gitlab projects to live alongside your Markdown.",
   "license": "MIT",
   "keywords": [
@@ -41,7 +41,7 @@
     "teardown": "rm -rf test/runtime/*",
     "test": "npm run teardown && $(npm bin)/jest",
     "test:coverage": "npm run teardown && $(npm bin)/jest --coverage --coverageReporters text text-summary",
-    "preversion": "npm run lint && npm run test"
+    "preversion": "npm run build && npm run lint && npm run test"
   },
   "main": "dist/index.js",
   "files": [

@@ -4,8 +4,8 @@
 [![Travis CI](https://img.shields.io/travis/temando/remark-gitlab-artifact.svg)](https://travis-ci.org/temando/remark-gitlab-artifact)
 [![MIT License](https://img.shields.io/github/license/temando/remark-gitlab-artifact.svg)](https://en.wikipedia.org/wiki/MIT_License)
 
-Downloads artifacts from [Gitlab](https://gitlab.com) projects to live alongside
-your Markdown.
+A [remark](https://github.com/wooorm/remark) plugin that downloads artifacts
+from [Gitlab](https://gitlab.com) projects to live alongside your Markdown.
 
 ## Installation
 
@@ -51,17 +51,19 @@ var example = vfile.readSync('example.md');
 remark()
   .use([gitlab, {
     apiBase: 'https://gitlab.com',
-    gitlabApiToken: 'abc-123',
-  })
+    gitlabApiToken: 'abc-123'
+  }])
   .process(example, function (err, file) {
     if (err) throw err;
-    console.log(String(file))
-    })
+
+    console.log(String(file));
   });
 ```
 
 The artifacts will be unzipped relative to `example.md`. To change this, set
-`data.destinationDir` on the vFile:
+`data.destinationFilePath` on the vFile. The following will download the
+artifacts into the `/out` directory, and then save `example.md` to the same
+directory:
 
 ```js
 var vfile = require('to-vfile');
@@ -70,20 +72,17 @@ var gitlab = require('remark-gitlab-artifact');
 
 var example = vfile.readSync('example.md');
 example.data = {
-  destinationDir: '~/absolute/path/to/output'
+  destinationFilePath: 'out/example.md'
 };
 
 remark()
   .use([gitlab, {
     apiBase: 'https://gitlab.com',
-    gitlabApiToken: 'abc-123',
-  })
+    gitlabApiToken: 'abc-123'
+  }])
   .process(example, function (err, file) {
     if (err) throw err;
-    vfile.writeSync({ path: example.destinationFilePath });
-    })
+
+    vfile.writeSync({ path: file.data.destinationFilePath });
   });
 ```
-
-This allows you process files from one directory, and save the
-results to another.

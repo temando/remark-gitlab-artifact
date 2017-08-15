@@ -24,12 +24,12 @@ and [Job Name](https://docs.gitlab.com/ee/ci/yaml/README.html#jobs). Authors
 must specify an entrypoint into the artifact, this is where the user will
 navigate to when the Markdown is published.
 
-The following will download the artifacts from the `build:docs` job for
-Gitlab project `1097`. When the user clicks on the API Reference link, they
-will be taken to `docs/index.html`.
+The following will download the artifacts from the `docs` job for Gitlab project
+`851`. When the user clicks on the API Reference link, they will be taken to
+`docs/index.html`.
 
 ```md
-[API Reference](docs/index.html "gitlab-artifact|1097|build:docs")
+[API Reference](docs/index.html "gitlab-artifact|851|docs")
 ```
 
 ## API
@@ -38,6 +38,27 @@ This plugin has two configuration values, which **must** be provided:
 
 - `apiBase` The URL to your Gitlab instance.
 - `gitlabApiToken` A personal access token for Gitlab, to authorise the API calls.
+
+## Messages
+
+Messages are added to the vFile's as they are processed and can be accessed
+using `file.messages`.
+
+### `info`
+
+Added when artifacts were able to be retrieved successfully:
+
+```sh
+example.md:1:1-1:60: artifacts fetched from 851 docs
+```
+
+### `error`
+
+Added when something went wrong fetching the artifact:
+
+```sh
+example.md:1:1-1:62: Not Found from https://gitlab.com/api/v4/projects/fafds/jobs/artifacts/master/download?job=docs.
+```
 
 ## Example
 
@@ -49,10 +70,10 @@ var gitlab = require('remark-gitlab-artifact');
 var example = vfile.readSync('example.md');
 
 remark()
-  .use([gitlab, {
+  .use(gitlab, {
     apiBase: 'https://gitlab.com',
     gitlabApiToken: 'abc-123'
-  }])
+  })
   .process(example, function (err, file) {
     if (err) throw err;
 
@@ -76,10 +97,10 @@ example.data = {
 };
 
 remark()
-  .use([gitlab, {
+  .use(gitlab, {
     apiBase: 'https://gitlab.com',
     gitlabApiToken: 'abc-123'
-  }])
+  })
   .process(example, function (err, file) {
     if (err) throw err;
 

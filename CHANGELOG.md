@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 Nil.
 
+## [v0.1.2] - 2017-08-15
+
+### Fixed
+
+- Package is now exported through `module.exports` for better compatibility with
+  remark ecosystem.
+- Further improvements to the README.
+
 ## [v0.1.1] - 2017-08-15
 
 ### Fixed

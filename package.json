@@ -1,6 +1,6 @@
 {
   "name": "remark-gitlab-artifact",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Downloads artifacts from Gitlab projects to live alongside your Markdown.",
   "license": "MIT",
   "keywords": [
@@ -13,6 +13,9 @@
     "type": "git",
     "url": "git@github.com:temando/remark-gitlab-artifact.git"
   },
+  "engines": {
+    "node": ">=6.10"
+  },
   "dependencies": {
     "bluebird": "^3.5.0",
     "isomorphic-fetch": "^2.2.1",
@@ -22,6 +25,7 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-async-to-module-method": "^6.24.1",
     "babel-preset-env": "^1.6.0",
     "eslint": "^4.4.0",
